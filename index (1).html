@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WEBSITE!!</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+    }
+    #bgVideo {
+      position: fixed;
+      top: 0;
+      left: 0;
+      min-width: 100%;
+      min-height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+    .top-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: black;
+      padding: 10px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      z-index: 50;
+      box-sizing: border-box;
+    }
+    .menu-icon {
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+      border: none;
+      background: none;
+      padding: 10px;
+    }
+    .menu-panel {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: rgba(51, 51, 51, 0.95);
+      color: white;
+      padding: 20px;
+      transform: translateY(-100%);
+      transition: transform 0.4s ease, background-color 0.3s ease-in-out;
+      box-sizing: border-box;
+      z-index: 100;
+    }
+    .menu-panel ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .menu-panel li {
+      padding: 10px;
+      cursor: pointer;
+      width: 100%;
+      text-align: center;
+    }
+    .menu-panel li:hover {
+      color: #bbb;
+    }
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(5px);
+      z-index: 99;
+      display: none;
+    }
+    .active .overlay {
+      display: block;
+    }
+    .content {
+      padding: 100px 20px;
+      text-align: center;
+      transition: filter 0.3s ease-in-out;
+      color: white;
+    }
+    .blurred {
+      filter: blur(5px);
+    }
+    .about-section {
+      background: rgba(255, 255, 255, 0.8);
+      padding: 20px;
+      margin-top: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      color: #333;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    @media (max-width: 600px) {
+      .menu-panel {
+        padding: 15px;
+      }
+      .menu-icon {
+        font-size: 20px;
+        padding: 8px;
+      }
+    }
+  </style>
+
+  <script>
+    function toggleMenu(show) {
+      const menu = document.getElementById("menuPanel");
+      const menuIcon = document.getElementById("menuIcon");
+      const overlay = document.getElementById("overlay");
+      const content = document.getElementById("content");
+      if (show) {
+        menu.style.transform = "translateY(0)";
+        menuIcon.style.display = "none";
+        overlay.style.display = "block";
+        content.classList.add("blurred");
+      } else {
+        menu.style.transform = "translateY(-100%)";
+        menuIcon.style.display = "block";
+        overlay.style.display = "none";
+        content.classList.remove("blurred");
+      }
+    }
+
+    function showHome() {
+      document.getElementById("content").innerHTML = `
+        <h1 style="color:black; font-weight:bold;">Welcome Bros</h1>
+        <p style="color:black; font-weight:bold;">Powerful websites take much time to develop!!..</p>
+      `;
+      toggleMenu(false);
+    }
+
+    function showAbout() {
+      document.getElementById("content").innerHTML = `
+        <div class="about-section">
+          <h2>About Me</h2>
+          <p>Hi, my name is <strong>Siddartha</strong>. I am passionate about building powerful websites!</p>
+        </div>
+      `;
+      toggleMenu(false);
+    }
+
+    function showServices() {
+      document.getElementById("content").innerHTML = `
+        <h2 style="color:black; font-weight:bold;">Services</h2>
+        <p style="color:black;">Will get developed in another step!</p>
+      `;
+      toggleMenu(false);
+    }
+  </script>
+</head>
+
+<body>
+
+  <!-- 🔥 Live Video Background -->
+  <video autoplay muted loop id="bgVideo">
+    <source src="Stars and sky.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <div class="top-bar">
+    <button id="menuIcon" class="menu-icon" onclick="toggleMenu(true)">☰</button>
+  </div>
+
+  <div id="overlay" class="overlay" onclick="toggleMenu(false)"></div>
+
+  <div id="menuPanel" class="menu-panel" onmouseenter="toggleMenu(true)" onmouseleave="toggleMenu(false)">
+    <ul>
+      <li onclick="showHome()">Home</li>
+      <li onclick="showAbout()">About</li>
+      <li onclick="showServices()">Services</li>
+      <li onclick="toggleMenu(false)">Contact</li>
+    </ul>
+  </div>
+
+  <div id="content" class="content">
+    <h1 style="color:black; font-weight:bold;">Welcome Bros</h1>
+    <p style="color:black; font-weight:bold;">Powerful websites take much time to develop!!..</p>
+  </div>
+
+</body>
+</html>
